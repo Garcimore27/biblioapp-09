@@ -22,7 +22,7 @@ class PageController extends AbstractController
         ]);
     }
 
-    #[Route('/contact', name: 'app_contact')]
+    #[Route('/contact', name: 'app_contact', methods: ['GET', 'POST'])]
     public function contact(): Response
     {
         return $this->render('page/contact.html.twig', [

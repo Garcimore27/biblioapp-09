@@ -87,4 +87,11 @@ class Language
 
         return $this;
     }
+
+        //convertir en string
+        public function __toString(): string
+        {
+            return $this->name;
+        }
+        
 }
