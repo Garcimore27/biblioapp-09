@@ -35,8 +35,10 @@
                 <td>{{ book.cover }}</td>
                 <td>{{ book.isAvailable ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('app_book_show', {'id': book.id}) }}" class="btn btn-success mb-1">>show</a>
+                    <div>
+                    <a href="{{ path('app_book_show', {'id': book.id}) }}" class="btn btn-success mb-2">>show</a>
                     <a href="{{ path('app_book_edit', {'id': book.id}) }}" class="btn btn-warning">>edit</a>
+                    </div>
                 </td>
             </tr>
         {% else %}
