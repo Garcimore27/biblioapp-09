@@ -8,6 +8,7 @@ use App\Entity\Author;
 use App\Entity\Editor;
 use App\Entity\Format;
 use App\Entity\Language;
+use App\Repository\AuthorRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -68,7 +69,8 @@ class BookType extends AbstractType
             ->add('authors', EntityType::class,[
                 'class' => Author::class,
                 'multiple' => true,
-                'choice_label' => 'firstname',
+                'choice_label' => function (Author $author) {
+                    return $author->getFirstname() . ' ' . $author->getLastname();},
                 'label' => 'Auteurs',
                 'attr' =>['class' => 'form-control'],
             ])
