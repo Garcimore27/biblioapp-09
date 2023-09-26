@@ -70,7 +70,7 @@ class BookType extends AbstractType
                 'class' => Author::class,
                 'multiple' => true,
                 'choice_label' => function (Author $author) {
-                    return $author->getFirstname() . ' ' . $author->getLastname();},
+                    return $author->getFullname();},
                 'label' => 'Auteurs',
                 'attr' =>['class' => 'form-control'],
             ])
