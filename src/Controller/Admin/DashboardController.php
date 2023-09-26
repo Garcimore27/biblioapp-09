@@ -2,7 +2,9 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Book;
 use App\Entity\Author;
+use App\Entity\Client;
 use App\Entity\Editor;
 use App\Entity\Format;
 use App\Entity\Category;
@@ -42,9 +44,12 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::section('Livres');
+        yield MenuItem::linkToCrud('Livres', 'fas fa-book', Book::class);
         yield MenuItem::section('Autorités');
         yield MenuItem::linkToCrud('Auteurs', 'fas fa-pen-nib', Author::class);
         yield MenuItem::linkToCrud('Editeurs', 'fas fa-users', Editor::class);
+        yield MenuItem::linkToCrud('Clients', 'fas fa-user-circle', Client::class);
         yield MenuItem::section('Paramètres');
         yield MenuItem::linkToCrud('Categories', 'fas fa-building', Category::class);
         yield MenuItem::linkToCrud('Formats', 'fas fa-arrow-circle-down', Format::class);
