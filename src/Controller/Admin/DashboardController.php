@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Book;
+use App\Entity\User;
 use App\Entity\Author;
 use App\Entity\Client;
 use App\Entity\Editor;
@@ -55,6 +56,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Formats', 'fas fa-arrow-circle-down', Format::class);
         yield MenuItem::linkToCrud('Langues', 'fas fa-language', Language::class);
         yield MenuItem::section('Autres');
+        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
         yield MenuItem::linkToRoute('Retour au Site', 'fas fa-arrow-left', 'app_page');
-    }
+    }   
 }
