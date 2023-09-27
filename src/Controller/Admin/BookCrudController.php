@@ -3,6 +3,11 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Book;
+use App\Controller\Admin\AuthorCrudController;
+use App\Controller\Admin\EditorCrudController;
+use App\Controller\Admin\FormatCrudController;
+use App\Controller\Admin\CategoryCrudController;
+use App\Controller\Admin\LanguageCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -14,6 +19,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class BookCrudController extends AbstractCrudController
@@ -53,6 +59,28 @@ class BookCrudController extends AbstractCrudController
         ->setUploadDir('public/uploads/images')
         ->setUploadedFileNamePattern('[slug]-[timestamp].[extension]');
         $isAvail = BooleanField::new('isAvailable');
+        // TODO: à voir avec les query builder
+        // $author = AssociationField::new('authors')
+        // ->autocomplete()
+        // ->setCrudController(AuthorCrudController::class)
+        // ;
+        $category = AssociationField::new('category')
+        ->setCrudController(CategoryCrudController::class)
+        ;
+
+        $format = AssociationField::new('format')
+        ->setCrudController(FormatCrudController::class)
+        ;
+
+        $editeur = AssociationField::new('editor')
+        ->setCrudController(EditorCrudController::class)
+        ;
+
+        $lang = AssociationField::new('language')
+        ->setCrudController(LanguageCrudController::class)
+        ;
+
+
 
         if (Crud::PAGE_EDIT === $pageName){
             return [
@@ -64,10 +92,36 @@ class BookCrudController extends AbstractCrudController
             ->setHelp("Saisissez le titre du livre"),
             $title,
 
+            FormField::addPanel('Categorie')
+            ->setIcon('fas fa-book')
+            ->setHelp("CAT"),
+            $category,
+
+            FormField::addPanel('Format')
+            ->setIcon('fas fa-book')
+            ->setHelp("Format"),
+            $format,
+
+            FormField::addPanel('Editeur')
+            ->setIcon('fas fa-book')
+            ->setHelp("Editeur"),
+            $editeur,
+
+            FormField::addPanel('Langue')
+            ->setIcon('fas fa-book')
+            ->setHelp("Langue"),
+            $lang,
+
+
             FormField::addPanel("Année de publication")
             ->setIcon('fas fa-calendar')
             ->setHelp("Quelle est l'année de publication du livre ?"),
             $year,
+
+            // FormField::addPanel("Auteur")
+            // ->setIcon('fas fa-hashtag')
+            // ->setHelp("Qui est l'auteur du livre"),
+            // $author,
 
             FormField::addPanel("N° ISBN")
             ->setIcon('fas fa-hashtag')
@@ -115,36 +169,66 @@ class BookCrudController extends AbstractCrudController
             ->setIcon('fas fa-book')
             ->setHelp("Saisissez le titre du livre"),
             $title,
+            
+            FormField::addPanel('Categorie')
+            ->setIcon('fas fa-book')
+            ->setHelp("CAT"),
+            $category,
+
+            FormField::addPanel('Format')
+            ->setIcon('fas fa-book')
+            ->setHelp("Format"),
+            $format,
+
+            FormField::addPanel('Editeur')
+            ->setIcon('fas fa-book')
+            ->setHelp("Editeur"),
+            $editeur,
+
+            FormField::addPanel('Langue')
+            ->setIcon('fas fa-book')
+            ->setHelp("Langue"),
+            $lang
+            ->hideOnIndex(),
 
             FormField::addPanel("Année de publication")
             ->setIcon('fas fa-calendar')
             ->setHelp("Quelle est l'année de publication du livre ?"),
             $year,
 
+            // FormField::addPanel("Auteur")
+            // ->setIcon('fas fa-hashtag')
+            // ->setHelp("Qui est l'auteur du livre"),
+            // $author,
+
             FormField::addPanel("N° ISBN")
             ->setIcon('fas fa-hashtag')
             ->setHelp("N° ISBN"),
-            $isbn,
+            $isbn
+            ->hideOnIndex(),
 
             FormField::addPanel("Entrez le prix de l'ouvrage")
             ->setIcon('fas fa-tag')
             ->setHelp("saisissez le prix !"),
-            $price,
+            $price
+            ->hideOnIndex(),
 
             FormField::addPanel("Nb de pages")
             ->setIcon('fas fa-file')
             ->setHelp("saisissez le nombre de pages !"),
-            $pages,
+            $pages
+            ->hideOnIndex(),
 
             FormField::addPanel("Résumé de l'ouvrage")
             ->setIcon('fas fa-book')
             ->setHelp("Saisissez un résumé du livre !"),
             $desc,
 
-            // FormField::addPanel("SLUG")
-            // ->setIcon('fas fa-book')
-            // ->setHelp("Saisissez un Slug !"),
-            // $slug,
+            FormField::addPanel("SLUG")
+            ->setIcon('fas fa-book')
+            ->setHelp("Saisissez un Slug !"),
+            $slug
+            ->hideOnIndex(),
 
             FormField::addPanel("Couverture du livre")
             ->setIcon('fas fa-book')
