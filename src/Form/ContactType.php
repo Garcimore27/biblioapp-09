@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -22,11 +23,15 @@ class ContactType extends AbstractType
                     ]
             ])
             ->add('email',EmailType::class,[
+                'label' => 'Adresse email',
                 'attr' => [
-                    'class' => 'form-control']
+                    'class' => 'form-control',
+                    'placehoder' => 'martin@martin.fr'
+                ]
+
             ])
             ->add('subject', ChoiceType::class,
-            [
+            [   'label' => 'Sujet',
                 'choices' => [
                     '' => 'Choisissez un sujet',
                     'Question' => 'Question',
@@ -36,7 +41,19 @@ class ContactType extends AbstractType
                 ]
 
             ])
-            ->add('message',TextareaType::class)
+            ->add('message',TextareaType::class,
+            [
+                'attr'=>[
+                    'placeholder' =>'Entrez votre msg ici !'
+                ]
+            ])
+
+            // ->add('message',CKEditorType::class,
+            // [
+            //     'config'=>[
+            //         'uiColor' =>'#ffffff'
+            //     ]
+            // ])
         ;
     }
 
