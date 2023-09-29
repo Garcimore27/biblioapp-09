@@ -3,18 +3,66 @@
 {% block title %}Hello ContactController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="container">
+    <div class="m-auto col-4 border rounded p-3 mt-4 bg-primary text-white">   
+        {{ form_start(contact) }}
+            <div class="mb-3">
+                {{ form_label(contact.name) }}
+                 <div class="input-group">
+                 <span class="input-group-text" id="basic-addon1">
+                    <i class="bi bi-person"></i>
+                 </span>
+                    {{ form_widget(contact.name, {
+                        attr: {
+                            class: 'form-control'
+                        }
+                    }) }}
+                </div>
+            </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+            <div class="mb-3">
+                {{ form_label(contact.email) }}
+                 <div class="input-group">
+                 <span class="input-group-text" id="basic-addon1">
+                    <i class="bi bi-envelope-at"></i>
+                 </span>
+                    {{ form_widget(contact.email, {
+                        attr: {
+                            class: 'form-control'
+                        }
+                    }) }}
+                </div>
+            </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/PREPAVENIR/POO/bib/biblioapp/src/Controller/PageController.php'|file_link(0) }}">src/Controller/PageController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/PREPAVENIR/POO/bib/biblioapp/templates/page/index.html.twig'|file_link(0) }}">templates/page/index.html.twig</a></code></li>
-    </ul>
+            <div class="mb-3">
+                {{form_label(contact.subject) }}
+                {{ form_widget(contact.subject, {
+                    attr: {class: 'form-select'},
+                })
+                }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(contact.message) }}
+                 <div class="input-group">
+                 <span class="input-group-text" id="basic-addon1">
+                    <i class="bi bi-chat-left-text"></i>
+                 </span>
+                    {{ form_widget(contact.message, {
+                        attr: {
+                            class: 'form-control'
+                        }
+                    }) }}
+                </div>
+            </div>
+            <div class="mb-3 form-check">
+                    <input class="form-check-input" type="checkbox" name="" id="form-check">
+                    <label for="form-check-input">J'accepte d'être recontacté(e)</label>
+            </div>
+            <button type="submit" class="btn btn-dark">
+                Envoyer
+            </button>
+        {{ form_end(contact) }}
+    </div>
 </div>
 {% endblock %}
